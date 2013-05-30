@@ -1,7 +1,18 @@
 require 'open-uri'
 require 'hpricot'
+require 'rubygems'
 
-doc = Hpricot(open("https://archlinux.org"))
-pkg_updates = (doc / "div.pkg-updates").text
+@url = "https://www.archlinux.org"
 
-puts pkg_updates
+open(@url, "User-Agent" => "Ruby/#{RUBY_VERSION}") do |f|
+
+	@response = f.read
+end
+
+doc = Hpricot(@response)
+puts doc
+
+#(doc/"/html/body/div[2]/div[3]/div[2]/h3/span").each do |pkg|
+	#puts "#{pkg.text.gsub(/"
+#end
+
